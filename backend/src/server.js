@@ -1,11 +1,13 @@
-import express, { urlencoded } from "express"
 import env from "dotenv"
 env.config()
+import express from "express"
+import userMagment from "./router/userManagment.js"
 import connectDb from "./config/db.js"
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use('/api/user',userMagment)
 
 const PORT = process.env.PORT || 3000
 
