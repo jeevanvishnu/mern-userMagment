@@ -1,10 +1,16 @@
 import env from "dotenv"
 env.config()
 import express from "express"
+import cors from "cors"
 import userMagment from "./router/userManagment.js"
 import connectDb from "./config/db.js"
 
+
 const app = express()
+// middleware
+app.use(cors({
+    origin:"  http://localhost:5173"
+}))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/api/user',userMagment)
