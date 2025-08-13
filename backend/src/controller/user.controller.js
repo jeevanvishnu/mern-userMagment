@@ -1,4 +1,4 @@
-import User from "../model/user.model.js"
+import User from "../model/user.model.js";
 
 export const getAllUser = async (req , res) =>{
     try {
@@ -7,6 +7,16 @@ export const getAllUser = async (req , res) =>{
         
     } catch (error) {
         console.log("Error in getAllUser controller",error.message);
+        res.status(500).json({message:"Internal server error"})
+    }
+}
+export const getUserById = async (req , res) =>{
+    try {
+       const user = await User.findById(req.params.id)
+       if(!user) res.status(404).json({message:"User Not Foud !"})
+        res.json(user)
+    } catch (error) {
+        console.log("Error in getUserById controller",error.message);
         res.status(500).json({message:"Internal server error"})
     }
 }
@@ -28,7 +38,9 @@ export const createUser = async (req , res) =>{
 export const updateUser = async (req , res) =>{
     try {
         const {name , email} = req.body
+        console.log(name,email,"update....")
         const id = req.params.id;
+        console.log(id);
         
         const update = await User.findByIdAndUpdate(id,
             {name,email},

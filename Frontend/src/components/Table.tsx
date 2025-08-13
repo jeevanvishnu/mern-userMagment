@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const Table = () => {
   type User ={
     _id: string,
-    id:string,
     name:string,
     email:string,
     createdAt:string
