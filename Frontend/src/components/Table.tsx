@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useParams } from 'react-router-dom';
 
 
 const Table = () => {
@@ -13,8 +14,10 @@ const Table = () => {
   
   
   const [user , setUser] = useState<User[]>([])
-  const URL = 'http://localhost:4000/api/user'
 
+  const URL = 'http://localhost:4000/api/user'
+  const {id} = useParams()
+  console.log(id)
   const formateDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-Us",{
       month:"short",
@@ -37,6 +40,18 @@ const Table = () => {
     }
     userData()
   })
+  const deletUser = async (id:string,e)  =>{
+    e.preventDefault()
+    try {
+      await axios.delete(`${URL}/${id}`)
+      setUser(pre => pre.filter((user)=>user._id !== id))
+      toast.success("Delete sucessfully")
+    } catch (error) {
+      if(error instanceof Error)
+        console.log(error);
+        
+    }
+  }
 
   return (
     <div>
@@ -62,7 +77,7 @@ const Table = () => {
         <td>{data.email}</td>
         <td>{formateDate(data.createdAt)}</td>
         <th>
-          <button  className='mr-2 btn btn-error'>Delete</button>
+          <button onClick={(e)=>deletUser(data._id,e)}  className='mr-2 btn btn-error'>Delete</button>
           <Link to={`/${data._id}`}>
           <button className='btn btn-success'>Edit</button>
           </Link>
