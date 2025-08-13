@@ -2,8 +2,10 @@ import React from "react";
 
 const EditForm = () => {
   return (
-    <div className="flex flex-col w-[400px] border h-[300px] items-center ">
-      <label className="my-5 input validator">
+    <div className="flex justify-center items-center h-svh">
+      <div className="flex flex-col  w-[600px]  items-center h-[300px]  border border-amber-50 ">
+        <h1 className="text-3xl font-serif my-6">Edit User</h1>
+      <label className=" input validator">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +25,7 @@ const EditForm = () => {
         <input type="text" required placeholder="Username" />
       </label>
 
-      <label className="input validator mb-6">
+      <label className="input validator my-3.5">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,8 @@ const EditForm = () => {
         <input type="text" required placeholder="Email" />
       </label>
       <button className=" btn btn-soft btn-success w-[200px]">Success</button>
-    </div>
+      </div>
+      </div>
   );
 };
 

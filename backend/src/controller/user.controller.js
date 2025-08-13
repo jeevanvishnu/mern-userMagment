@@ -14,6 +14,7 @@ export const getAllUser = async (req , res) =>{
 export const createUser = async (req , res) =>{
     try {
         const {name , email} = req.body
+        console.log(name,email)
         const newUser = new User({name , email})
         await newUser.save()
         res.status(201).json({message:"User created sucessfully !"})
